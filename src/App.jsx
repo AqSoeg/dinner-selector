@@ -1,29 +1,41 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import Roller from './components/Roller'
 import './App.css'
 
-function Roller({ dishes, currentIndex, setCurrentIndex, isRoll }) {
-  if (isRoll) {
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % dishes.length)
-    }, 50)
-  }
-  return (
-    <div>
-      <p className='py-6 text-xl'>{dishes[currentIndex]}</p>
-    </div>
-  )
-}
-
 function App() {
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [isRoll, setIsRoll] = useState(false)
+  const [isPause, setIsPause] = useState(false)
   const dishes = [
-    '重庆小面',
-    '东北饺子',
-    '朱新年',
-    '兰州拉面',
-    '山东饺子',
-    '油泼面',
+    {
+      id: 1,
+      name: '重庆小面',
+      location: '十全街',
+    },
+    {
+      id: 2,
+      name: '重庆小面',
+      location: '十全街',
+    },
+    {
+      id: 3,
+      name: '东北饺子',
+      location: '十全街',
+    },
+    {
+      id: 4,
+      name: '朱新年',
+      location: '双塔',
+    },
+    {
+      id: 5,
+      name: '兰州拉面',
+      location: '相门后庄',
+    },
+    {
+      id: 6,
+      name: '油泼面',
+      location: '十全街',
+    },
   ]
 
   return (
@@ -31,17 +43,19 @@ function App() {
       <div className='hero-content text-center'>
         <div className='max-w-md'>
           <h1 className='text-5xl font-bold'>晚上吃什么？</h1>
-          <Roller
-            dishes={dishes}
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            isRoll={isRoll}
-          />
+          <Roller dishes={dishes} isRoll={isRoll} isPause={isPause} />
           <button
             className='btn btn-primary'
-            onClick={() => setIsRoll(!isRoll)}
+            onClick={() => {
+              if (isRoll) {
+                setIsPause(true)
+              } else {
+                setIsPause(false)
+              }
+              setIsRoll(!isRoll)
+            }}
           >
-            {isRoll ? '停！' : '随机一下'}
+            {isRoll ? '停！' : '开始'}
           </button>
         </div>
       </div>
