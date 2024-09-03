@@ -13,8 +13,8 @@ function App() {
     },
     {
       id: 2,
-      name: '重庆小面',
-      location: '十全街',
+      name: '滨寿司',
+      location: '仓街',
     },
     {
       id: 3,
